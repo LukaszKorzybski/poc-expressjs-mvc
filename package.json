@@ -1,0 +1,25 @@
+{
+  "name": "poc-expressjs-mvc",
+  "version": "1.0.0",
+  "description": "Express.JS MVC PoC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LukaszKorzybski/poc-expressjs-mvc.git"
+  },
+  "author": "Lukasz Korzybski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LukaszKorzybski/poc-expressjs-mvc/issues"
+  },
+  "homepage": "https://github.com/LukaszKorzybski/poc-expressjs-mvc",
+  "dependencies": {
+    "express": "^4.13.0"
+  },
+  "devDependencies": {
+    "jasmine": "^2.3.1"
+  }
+}
