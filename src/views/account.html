@@ -1,0 +1,30 @@
+{>"base"/}
+
+{<title}My Account{/title}
+
+{<content}
+    <a href="/">Go back to welcome</a>
+
+    <form action="/account/{form.data.userId}" method="post">
+        {#form}
+        {#errors}
+            <input type="hidden" name="userId" value="{data.userId}">
+            <p>
+                {username.required}
+                <label for="id_username">Username <input id="id_username" name="username" value="{data.username}"></label>
+            </p>
+            <p>
+                {height.required}
+                {height.integer}
+                <label for="id_height">Height (centimeters) <input id="id_height" name="height" value="{data.height}"></label>
+            </p>
+            <p>
+                <label for="id_email">Email <input id="id_email" name="email" value="{data.email}"></label>
+            </p>
+
+            <button type="submit">Save</button>
+            <a href="/">Cancel</a>
+        {/errors}
+        {/form}
+    </form>    
+{/content}
