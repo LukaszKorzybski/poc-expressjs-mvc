@@ -1,5 +1,5 @@
-var unirest = require('unirest'),
-    promiseWrapper = require('../utils/promiseWrapper')();
+    var unirest = require('unirest'),
+    promiseWrapper = require('../utils/PromiseWrapper')();
 
 module.exports = function AccountService(config) {
     'use strict';

@@ -1,22 +1,23 @@
 var _ = require('lodash'),
     validator = require('validator'),
+    FormMixin = require('../utils/formMixin'),    
     validationErrors = require('../utils/validationErrors');
 
 module.exports = function Form(requestBody) {
-    'use strict';
+    'use strict';    
 
-    this.data = requestBody || undefined;
-    this.errors = {};
+    throw new Error("sadu");
+
+    FormMixin.apply(this, [requestBody]);
+    var formMethods = new FormMixin.methods;
 
     this.bind = function(obj) {
-        this.data = _.merge({}, obj);
+        formMethods.bind.apply(this, [obj]);
         this.data.height = obj.height * 100;
     };
 
     this.isValid = function() {
-        if (!this.data) {
-            throw new Error("Cannot validate unbound form.");
-        }
+        this._throwErrorIfUnbound();
 
         !validator.isNull(this.data.username) || this._addError('username', validationErrors.required);
         !validator.isNull(this.data.height) || this._addError('height', validationErrors.required);
@@ -26,29 +27,11 @@ module.exports = function Form(requestBody) {
     };
 
     this.applyTo = function(obj) {
-        if (!this.data) {
-            throw new Error("Cannot apply unbound form.");
-        }
+        this._throwErrorIfUnbound();
 
-        obj.username = this.data.username;
+        formMethods.applyTo.apply(this, [obj]);
         obj.height = validator.toInt(this.data.height) / 100;
-        obj.email = this.data.email;
-
+        
         return obj;
-    };
-
-    this.hasErrors = function() {
-        var fieldsWithErrors = Object.keys(this.errors);            
-        return fieldsWithErrors.length > 0;                
-    };
-
-    this._addError = function(field, validationError, customMessage) {
-        var customisedMessage = customMessage ? customMessage : validationError.message;
-
-        if (!this.errors[field]) {
-            this.errors[field] = {};
-        }
-
-        this.errors[field][validationError.type] = customisedMessage;
     };
 };

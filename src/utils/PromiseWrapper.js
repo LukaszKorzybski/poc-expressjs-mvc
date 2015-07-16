@@ -1,3 +1,5 @@
+var HTTPRequestError = require('../exceptions/HTTPRequestError');
+
 module.exports = function PromiseWrapper() {
     'use strict';
 
@@ -6,7 +8,12 @@ module.exports = function PromiseWrapper() {
     self.wrapRequest = function(unirestRequest) {
         var promise = new Promise(function(resolve, reject) {
             unirestRequest.end(function(response) {
-                response.ok ? resolve(response) : reject(response);
+                if (response.ok) {
+                    resolve(response)
+                } else {
+                    var error = new HTTPRequestError(response);
+                    reject(error);
+                }
             });
         });
 
