@@ -1,3 +1,4 @@
+'use strict';
 
 module.exports = function productionErrorHandler(err, req, res, next) {
     console.error(err.stack);

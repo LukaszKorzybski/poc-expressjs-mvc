@@ -1,6 +1,6 @@
-var WelcomeController = require('./controllers/welcomeController'),    
-    AccountController = require('./controllers/accountController'),
-    AccountService = require('./services/accountService');    
+var WelcomeController = require('./controllers/WelcomeController'),    
+    AccountController = require('./controllers/AccountController'),
+    AccountService = require('./services/AccountService');    
 
 module.exports = function routes(app, config) {    
     var accountService = new AccountService(config),    

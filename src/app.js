@@ -30,7 +30,7 @@ var setupTemplateEngine = function() {
 }
 
 var setupErrorHandling = function() {
-    if (app.get('env') === 'development') {
+    if (app.get('env') !== 'development') {
         app.use(productionErrorHandler);        
     }
 };
