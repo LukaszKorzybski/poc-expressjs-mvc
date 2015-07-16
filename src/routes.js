@@ -1,3 +1,4 @@
+'use strict';
 var WelcomeController = require('./controllers/WelcomeController'),    
     AccountController = require('./controllers/AccountController'),
     AccountService = require('./services/AccountService');    
