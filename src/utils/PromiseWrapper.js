@@ -1,22 +1,22 @@
 'use strict';
-var HTTPRequestError = require('../exceptions/HTTPRequestError');
+var Q = require('q'),
+    HTTPRequestError = require('../exceptions/HTTPRequestError');
 
 module.exports = function PromiseWrapper() {    
     var self = {};
     
-    self.wrapRequest = function(unirestRequest) {
-        var promise = new Promise(function(resolve, reject) {
-            unirestRequest.end(function(response) {
-                if (response.ok) {
-                    resolve(response)
-                } else {
-                    var error = new HTTPRequestError(response);
-                    reject(error);
-                }
-            });
+    self.wrapRequest = function wrapRequest(unirestRequest) {
+        var deferred = Q.defer();
+        
+        unirestRequest.end(function(response) {
+            if (response.ok) {
+                deferred.resolve(response);
+            } else {                                    
+                deferred.reject(new HTTPRequestError(response));
+            }
         });
 
-        return promise;
+        return deferred.promise;
     };
     
     return self;

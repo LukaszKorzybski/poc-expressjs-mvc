@@ -24,6 +24,8 @@
     "klei-dust": "^1.0.0",
     "lodash": "^3.9.3",
     "node-custom-errors": "^0.1.5",
+    "q": "^1.4.1",
+    "underscore.string": "^3.1.1",
     "unirest": "^0.4.2",
     "validator": "^3.40.1"
   },

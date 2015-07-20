@@ -5,7 +5,6 @@ var util = require('util'),
     validationErrors = require('../utils/validationErrors'),
     Form = require('../utils/Form');
     
-
 function AccountForm(requestBody) {
     Form.apply(this, [requestBody]);
 
@@ -26,7 +25,7 @@ function AccountForm(requestBody) {
 
     this.applyTo = function(obj) {
         AccountForm.super_.prototype.applyTo.apply(this, [obj]);
-        
+
         obj.height = validator.toInt(this.data.height) / 100;
         
         return obj;

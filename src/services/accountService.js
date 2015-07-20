@@ -1,14 +1,18 @@
 'use strict';
 var unirest = require('unirest'),
-    promiseWrapper = require('../utils/PromiseWrapper')();
+    promiseWrapper = require('../utils/PromiseWrapper')(),
+    ItemNotFoundError = require('../exceptions/ItemNotFoundError');
 
 module.exports = function AccountService(config) {
     var accountUrl = config.backendUrl + '/account';
 
     this.getAccount = function(userId) {
         var request = unirest.get(accountUrl + '/' + userId);
-
-        return promiseWrapper.wrapRequest(request);
+        
+        return promiseWrapper.wrapRequest(request)
+            .catch(function(err) {
+               throw new ItemNotFoundError('Account', userId, err);
+            });
     };
 
     this.updateAccount = function(account) {
@@ -16,6 +20,6 @@ module.exports = function AccountService(config) {
             .put(accountUrl + '/' + account.userId)
             .send(account);
 
-        return promiseWrapper.wrapRequest(request);;
+        return promiseWrapper.wrapRequest(request);
     };
 };

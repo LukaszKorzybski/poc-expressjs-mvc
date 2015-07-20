@@ -1,5 +1,6 @@
 'use strict';
-var express = require('express'),
+var Q = require('q'),
+    express = require('express'),
     bodyParser = require('body-parser'),
     kleiDust = require('klei-dust'),
     config = require('./config'),
@@ -30,8 +31,10 @@ var setupTemplateEngine = function() {
     app.set('view options', { layout: false });
 }
 
-var setupErrorHandling = function() {
-    if (app.get('env') !== 'development') {
+var setupErrorHandling = function() {    
+    if (app.get('env') === 'development') {
+        Q.longStackSupport = true;
+    } else {
         app.use(productionErrorHandler);        
     }
 };

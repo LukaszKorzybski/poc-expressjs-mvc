@@ -3,13 +3,13 @@ var AccountForm = require('../forms/AccountForm.js');
 
 module.exports = function AccountController(accountService) {
     this.viewAccount = function(req, res, next) {
-        var userId = req.params.userId;        
+        var userId = req.params.userId;
 
         accountService
             .getAccount(userId)
-            .then(function(response) {                
+            .then(function(response) {
                 var account = response.body,
-                    form = new AccountForm();            
+                    form = new AccountForm();
 
                 form.bind(account);
                 res.render('account', { form: form });
@@ -24,9 +24,9 @@ module.exports = function AccountController(accountService) {
             form = new AccountForm(req.body);
 
         if (form.isValid()) {
-            var getPromise = accountService.getAccount(userId);
+            var responsePromise = accountService.getAccount(userId);
 
-            getPromise.then(function(getResponse) {
+            responsePromise.then(function(getResponse) {
                 var account = getResponse.body;
                 
                 form.applyTo(account);
