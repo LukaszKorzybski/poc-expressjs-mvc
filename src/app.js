@@ -5,6 +5,7 @@ var Q = require('q'),
     kleiDust = require('klei-dust'),
     config = require('./config'),
     routes = require('./routes'),
+    debugErrorHandler = require('./utils/debugErrorHandler'),
     productionErrorHandler = require('./utils/productionErrorHandler');
 
 var app = null;
@@ -31,11 +32,12 @@ var setupTemplateEngine = function() {
     app.set('view options', { layout: false });
 }
 
-var setupErrorHandling = function() {    
+var setupErrorHandling = function() {
     if (app.get('env') === 'development') {
         Q.longStackSupport = true;
+        app.use(debugErrorHandler);
     } else {
-        app.use(productionErrorHandler);        
+        app.use(productionErrorHandler);
     }
 };
 
