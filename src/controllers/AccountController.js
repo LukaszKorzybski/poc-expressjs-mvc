@@ -2,6 +2,7 @@
 var AccountForm = require('../forms/AccountForm.js');
 
 module.exports = function AccountController(accountService) {
+    
     this.viewAccount = function(req, res, next) {
         var userId = req.params.userId;
 
