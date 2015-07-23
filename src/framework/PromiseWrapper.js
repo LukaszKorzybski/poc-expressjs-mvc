@@ -1,6 +1,6 @@
 'use strict';
 var Q = require('q'),
-    HTTPRequestError = require('../exceptions/HTTPRequestError');
+    HTTPRequestError = require('./exceptions/HTTPRequestError');
 
 module.exports = function PromiseWrapper() {    
     var self = {};

@@ -1,9 +1,10 @@
 'use strict';
 var util = require('util'),
-    _ = require('lodash'),
+    _ = require('lodash'),    
     validator = require('validator'),
-    validationErrors = require('../utils/validationErrors'),
-    Form = require('../utils/Form');
+        
+    validationErrors = require('../framework/forms/validationErrors'),
+    Form = require('../framework/forms/Form');
     
 function AccountForm(requestBody) {
     Form.apply(this, [requestBody]);

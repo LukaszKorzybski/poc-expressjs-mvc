@@ -1,6 +1,6 @@
 'use strict';
 var unirest = require('unirest'),
-    promiseWrapper = require('../utils/PromiseWrapper')(),
+    promiseWrapper = require('../framework/PromiseWrapper')(),
     ItemNotFoundError = require('../exceptions/ItemNotFoundError');
 
 module.exports = function AccountService(config) {

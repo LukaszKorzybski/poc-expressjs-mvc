@@ -5,7 +5,7 @@ var Q = require('q'),
     kleiDust = require('klei-dust'),
     config = require('./config'),
     routes = require('./routes'),
-    errorUtils = require('./utils/errorUtils');
+    errorUtils = require('./framework/errorUtils');
 
 var app = null;
 
