@@ -11,7 +11,11 @@ module.exports = function AccountService(config) {
         
         return promiseWrapper.wrapRequest(request)
             .catch(function(err) {
-               throw new ItemNotFoundError('Account', userId, err);
+                if (err.responseStatus === 404) {
+                    throw new ItemNotFoundError('Account', userId, err);
+                } else {
+                    throw err;
+                }
             });
     };
 

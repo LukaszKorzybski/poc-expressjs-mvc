@@ -5,7 +5,8 @@ var Q = require('q'),
     kleiDust = require('klei-dust'),
     config = require('./config'),
     routes = require('./routes'),
-    errorUtils = require('./framework/errorUtils');
+    errorUtils = require('./framework/errorUtils'),
+    exceptionMappers = require('./exceptions/exceptionMappers');
 
 var app = null;
 
@@ -18,8 +19,9 @@ var main = function() {
 var initialize = function() {
     app.use(bodyParser());
     setupTemplateEngine();    
-    routes(app, config);
-    setupErrorHandling();
+    routes(app, config);        
+    setupExceptionMapping();
+    setupUnhandledExceptionReporting();
 };
 
 var setupTemplateEngine = function() {
@@ -31,7 +33,13 @@ var setupTemplateEngine = function() {
     app.set('view options', { layout: false });
 }
 
-var setupErrorHandling = function() {
+var setupExceptionMapping = function() {
+    if (app.get('env') !== 'development') {
+        exceptionMappers.register(app);
+    }
+};
+
+var setupUnhandledExceptionReporting = function() {
     if (app.get('env') === 'development') {
         Q.longStackSupport = true;
         app.use(errorUtils.debugErrorHandler);
