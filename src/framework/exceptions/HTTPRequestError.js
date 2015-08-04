@@ -8,6 +8,7 @@ var HTTPRequestError = errors.create('HTTPRequestError', Error, null, false, fun
         template = 'HTTP request failed | %s %s | Status: %s',
         errorMessage = sprintf(template, method, request.href, response.status);
 
+    this.name = 'HTTPRequestError';
     this.message = errorMessage;
     this.cause = cause;
 
