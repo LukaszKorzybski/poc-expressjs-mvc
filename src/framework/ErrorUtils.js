@@ -1,16 +1,19 @@
 'use strict';
 
-var errorUtils = {
-    debugErrorHandler: function(err, req, res, next) {
-        var fullStackTrace = errorUtils.getFullStackTrace(err);
-        console.error(fullStackTrace);
+module.exports = function ErrorUtils(logger) {
+
+    this.debugErrorHandler = function(err, req, res, next) {
+        var fullStackTrace = this.getFullStackTrace(err);
+        logger.error(fullStackTrace);
         res.status(500).send('<!DOCTYPE html><title>Internal Server Error</title><pre>' + fullStackTrace + '</pre>');
-    },    
-    productionErrorHandler: function(err, req, res, next) {
-        console.error(errorUtils.getFullStackTrace(err));
+    };
+
+    this.productionErrorHandler = function(err, req, res, next) {
+        logger.error(this.getFullStackTrace(err));
         res.status(500).render('500');
-    },
-    getFullStackTrace: function(error) {
+    };
+
+    this.getFullStackTrace = function(error) {
         var result = '',
             currentError = error;
 
@@ -26,7 +29,5 @@ var errorUtils = {
         };
 
         return result;
-    }
+    };   
 };
-
-module.exports = errorUtils;

@@ -2,7 +2,7 @@
 var Q = require('q'),
     bodyParser = require('body-parser'),
     kleiDust = require('klei-dust'),    
-    errorUtils = require('./errorUtils'),
+    ErrorUtils = require('./ErrorUtils'),
     exceptionMappers = require('./exceptionMappers');
 
 function WebApplication(app, config, routes) {
@@ -37,11 +37,13 @@ proto.setupExceptionMapping = function() {
 };
 
 proto.setupUnhandledExceptionReporting = function() {
+    var errorUtils = new ErrorUtils(console);
+
     if (this.app.get('env') === 'development') {
         Q.longStackSupport = true;
-        this.app.use(errorUtils.debugErrorHandler);
+        this.app.use(errorUtils.debugErrorHandler.bind(errorUtils));
     } else {
-        this.app.use(errorUtils.productionErrorHandler);
+        this.app.use(errorUtils.productionErrorHandler.bind(errorUtils));
     }
 };
 
