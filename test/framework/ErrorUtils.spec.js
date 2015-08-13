@@ -1,6 +1,7 @@
 'use strict';
 
-var ErrorUtils = require('../../src/framework/ErrorUtils.js');
+var ErrorUtils = require('../../src/framework/ErrorUtils.js'),
+    mocks = require('../helpers/mocks.js');
 
 describe('ErrorUtils', function() {
     
@@ -10,10 +11,9 @@ describe('ErrorUtils', function() {
 
     beforeEach(function() {
         logger = jasmine.createSpyObj('logger', ['error']),
-        response = jasmine.createSpyObj('response', ['send', 'status', 'render']);
+        response = mocks.response();
 
-        errorUtils = new ErrorUtils(logger);
-        response.status.and.returnValue(response);
+        errorUtils = new ErrorUtils(logger);        
     });
 
     describe('debugErrorHandler', function() {
