@@ -45,5 +45,33 @@ describe('ErrorUtils', function() {
             errorUtils.productionErrorHandler({}, null, response, null)
             expect(response.render).toHaveBeenCalledWith('500');
         });
+    });
+
+    describe('getFullStackTrace', function() {
+        it('should return empty string if error does not have a stack trace or cause', function() {
+            var error = {};
+            var result = errorUtils.getFullStackTrace(error);
+            expect(result).toBe("");
+        });
+
+        it("should return error's stack trace if error does not have cause", function() {
+            var error = { stack: 'stack trace' };
+            var result = errorUtils.getFullStackTrace(error);
+            expect(result).toBe(error.stack);
+        });
+
+        it("should return valid stack trace when cause's does not have a stack trace", function() {
+            var error = { stack: 'stack trace', cause: {} };
+            var result = errorUtils.getFullStackTrace(error);
+            expect(result).toMatch(/^stack trace/);
+        });
+
+        it("should return composed stack trace for error and its cause", function() {
+            var cause = { stack: 'cause stack trace' },
+                error = { stack: 'stack trace', cause: cause };
+
+            var result = errorUtils.getFullStackTrace(error);
+            expect(result).toBe(error.stack + "\nCaused by:\n" + cause.stack);
+        });
     });    
 });
