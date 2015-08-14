@@ -1,7 +1,7 @@
 'use strict';
 
-var ErrorUtils = require('../../src/framework/ErrorUtils.js'),
-    mocks = require('../helpers/mocks.js');
+var mocks = require('../helpers/mocks.js'),
+    ErrorUtils = require('../../src/framework/ErrorUtils.js');
 
 describe('ErrorUtils', function() {
     

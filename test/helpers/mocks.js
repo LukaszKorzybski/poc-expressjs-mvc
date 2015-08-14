@@ -6,5 +6,8 @@ module.exports = {
         
         response.status.and.returnValue(response);
         return response;
+    },
+    next: function() {
+        return jasmine.createSpy('next');
     }
 };
