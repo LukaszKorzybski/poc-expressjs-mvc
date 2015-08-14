@@ -8,7 +8,7 @@ module.exports = function PromiseWrapper() {
     self.wrapRequest = function wrapRequest(unirestRequest) {
         var deferred = Q.defer();
         
-        unirestRequest.end(function(response) {
+        unirestRequest.end(function(response) {            
             if (response.ok) {
                 deferred.resolve(response);
             } else {                                    
