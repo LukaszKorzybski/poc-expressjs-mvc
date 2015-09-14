@@ -14,7 +14,7 @@ proto.bind = function(obj) {
 
 proto.isValid = function() {
     this._throwErrorIfUnbound();
-    return !this.hasErrors();
+    return true;
 };
 
 proto.applyTo = function(obj) {
