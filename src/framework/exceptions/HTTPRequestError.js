@@ -1,4 +1,5 @@
 'use strict';
+
 var errors = require('node-custom-errors'),
     sprintf = require("underscore.string/sprintf");
 
