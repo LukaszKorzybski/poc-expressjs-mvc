@@ -1,7 +1,6 @@
 'use strict';
-var AccountForm = require('../forms/AccountForm.js');
 
-module.exports = function AccountController(accountService) {
+module.exports = function AccountController(accountService, AccountForm) {
     
     this.viewAccount = function(req, res, next) {
         var userId = req.params.userId;

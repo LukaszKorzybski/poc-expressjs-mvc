@@ -2,7 +2,7 @@
 
 module.exports = {
     response: function() {
-        var response = jasmine.createSpyObj('response', ['send', 'status', 'render']);
+        var response = jasmine.createSpyObj('response', ['send', 'status', 'render', 'redirect']);
 
         response.status.and.returnValue(response);
         return response;
@@ -12,5 +12,8 @@ module.exports = {
     },
     next: function() {
         return jasmine.createSpy('next');
+    },
+    form: function() {
+        return jasmine.createSpyObj('form', ['bind', 'isValid', 'applyTo']);
     }
 };
